@@ -8,7 +8,7 @@
         public decimal Preco { get; set; }
         public string Categoria { get; set; } = string.Empty;
 
-        public ICollection<ItemPedido> ItemPedidos { get; set; } = new List<ItemPedido>();
+        public ICollection<ItemPedidos> ItemPedidos { get; set; } = new List<ItemPedidos>();
         public ICollection<Estoque> Estoque { get; set; } = new List<Estoque>();
     }
 }
