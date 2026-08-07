@@ -63,5 +63,28 @@ namespace SaborCia.API.Controllers
             return NoContent();
         }
 
+        [HttpPut("{id}/senha")]
+        public async Task<IActionResult> AlterarSenha(int id, AlteraSenha dto)
+        {
+            var usuario = await _context.Usuarios.FindAsync();
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            bool senhaCorreta = BCrypt.Net.BCrypt.Verify(dto.SenhaAtual, usuario.SenhaHash);
+
+            if(!senhaCorreta)
+            {
+                return BadRequest("Senha atual Incorreta.");
+            }
+
+            usuario.SenhaHash = BCrypt.Net.BCrypt.HashPassword(dto.SenhaNova);
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
     }
 }
