@@ -39,5 +39,6 @@ namespace SaborCia.API.Controllers
             return CreatedAtAction(nameof(GetPrdutos), new { id = produtos.Id }, produtos);
         }
 
+
     }
 }
