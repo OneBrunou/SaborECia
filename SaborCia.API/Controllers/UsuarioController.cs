@@ -43,5 +43,9 @@ namespace SaborCia.API.Controllers
 
             return CreatedAtAction(nameof(GetUsuarios), new { id = usuario.Id }, usuario);
         }
+
+        [HttpPut ("{id")]
+        public async Task<IActionResult> AtualizarUsuario (int id, AtualizarUsuarioDto dto)
+
     }
 }
