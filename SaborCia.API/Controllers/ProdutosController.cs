@@ -38,7 +38,24 @@ namespace SaborCia.API.Controllers
 
             return CreatedAtAction(nameof(GetPrdutos), new { id = produtos.Id }, produtos);
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> AtualizarProduto(int id, AtualizarProdutoDto dto)
+        {
+            var produto = await _context.Produtos.FindAsync(id);
+            if (produto == null)
+            {
+                return NotFound();
+            }
 
+            produto.Nome = dto.Nome;
+            produto.Preco = dto.Preco;
+            produto.Descricao = dto.Descricao;
+            produto.Categoria = dto.Categoria;
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
 
     }
 }
