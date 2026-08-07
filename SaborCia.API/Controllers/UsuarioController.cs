@@ -46,6 +46,22 @@ namespace SaborCia.API.Controllers
 
         [HttpPut ("{id")]
         public async Task<IActionResult> AtualizarUsuario (int id, AtualizarUsuarioDto dto)
+        {
+            var usuario = await _context.Usuarios.FindAsync(id);
+
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            usuario.Nome = dto.Nome;
+            usuario.Email = dto.Email;
+            usuario.RoleUsuario = Enum.Parse<RoleUsuario>(dto.RoleUsuario);
+            usuario.IdUnidade = dto.IdUnidade;
+
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
 
     }
 }
