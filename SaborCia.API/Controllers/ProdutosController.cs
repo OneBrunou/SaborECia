@@ -57,5 +57,19 @@ namespace SaborCia.API.Controllers
             return NoContent();
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletarProduto(int id)
+        {
+            var produto = await _context.Produtos.FindAsync(id);
+            if (produto == null)
+            {
+                return NotFound();
+            }
+
+            _context.Produtos.Remove(produto);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
     }
 }
